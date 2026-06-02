@@ -11,10 +11,11 @@ class LLMClient:
         self.claude_key = os.getenv("ANTHROPIC_API_KEY", "")
 
     def _call_lms(self, prompt, temperature=0.78, max_tokens=6000):
-        """通过 lms.exe CLI 调用本地模型（避开 HTTP API 认证问题）"""
+        """通过 lms.exe stdin 管道调用本地模型（--prompt 在 subprocess 中会阻塞）"""
         r = subprocess.run(
-            [LMS, "chat", self.local_model, "--prompt", prompt],
-            capture_output=True, timeout=300
+            [LMS, "chat", self.local_model],
+            input=prompt.encode("utf-8"),
+            capture_output=True, timeout=600
         )
         text = r.stdout.decode("utf-8", errors="replace")
         # 清理终端转义和 think 标签
@@ -22,6 +23,9 @@ class LLMClient:
         text = re.sub(r'\x1b\[[0-9;]*[mK]', '', text)
         text = re.sub(r'\r', '', text)
         text = re.sub(r'<think>.*?</think>', '', text, flags=re.DOTALL)
+        # Qwen 等模型会在 <think> 外输出思考过程，取 </think> 之后为正文
+        if '</think>' in text:
+            text = text.split('</think>')[-1]
         text = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f]', '', text)
         return text.strip()
 
