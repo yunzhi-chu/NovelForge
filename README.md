@@ -232,6 +232,35 @@ python app.py  # 然后通过 UI 操作
 
 ---
 
+## 🙏 学习来源
+
+本项目在开发过程中参考了以下开源项目，特此致谢。
+
+### AI-Novel-Writing-Assistant
+
+https://github.com/ExplosiveCoderflome/AI-Novel-Writing-Assistant
+
+| 参考内容 | 对应实现 |
+|----------|----------|
+| 项目结构设计 | app.py 页面路由、project_manager.py 文件系统存储 |
+| 多模型支持架构 | llm_client.py 三模型路由（本地/DeepSeek/Claude） |
+| 全流程写作管线 | 世界观 → 角色 → 大纲 → 章节 → 图谱的完整流程 |
+| 知识图谱可视化 | app.py 知识图谱页面的 Mermaid 角色关系图 |
+
+### chinese-novelist-skill
+
+https://github.com/PenglongHuang/chinese-novelist-skill
+
+| 参考内容 | 对应实现 |
+|----------|----------|
+| 三层递进问答引导 | app.py 创作引导页面：核心设定→细化定制→标题生成 |
+| 悬念钩子系统 | app.py 章节写作页面的 13 种章末钩子 + 7 种章首引子 |
+| 章节校验规则 | project_manager.py 的 validate_all_chapters() 字数 + 连贯性检查 |
+| 跨会话偏好系统 | project_manager.py 的 user-preferences.json 持久化机制 |
+| 中断续写检测 | project_manager.py 的 get_unfinished_projects() 方法 |
+
+---
+
 ## 📄 License
 
 MIT License © 2026 yunzhi-chu
