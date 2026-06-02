@@ -6,7 +6,7 @@ LMS = os.path.expanduser("~/.lmstudio/bin/lms.exe")
 
 class LLMClient:
     def __init__(self):
-        self.local_model = "google/gemma-4-26b-a4b"
+        self.local_model = "qwen3.6-35b-a3b-uncensored-hauhaucs-aggressive"
         self.deepseek_key = os.getenv("DEEPSEEK_API_KEY", "")
         self.claude_key = os.getenv("ANTHROPIC_API_KEY", "")
 
