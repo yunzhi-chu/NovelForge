@@ -1,4 +1,10 @@
-"""项目管理：文件系统存储"""
+"""项目管理：文件系统存储
+学习来源：
+  - AI-Novel-Writing-Assistant (github.com/ExplosiveCoderflome/AI-Novel-Writing-Assistant)
+    参考：项目文件结构设计、章节管理、ZIP 导出
+  - chinese-novelist-skill (github.com/PenglongHuang/chinese-novelist-skill)
+    参考：跨会话偏好系统、中断续写检测、全文校验流程
+"""
 import os, json, shutil, zipfile, threading
 from datetime import datetime
 

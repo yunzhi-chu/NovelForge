@@ -1,4 +1,10 @@
-"""NovelForge - 小说写作助手 (Streamlit)"""
+"""NovelForge - 小说写作助手 (Streamlit)
+学习来源：
+  - AI-Novel-Writing-Assistant (github.com/ExplosiveCoderflome/AI-Novel-Writing-Assistant)
+    参考：项目结构、多模型支持、知识图谱可视化、全流程写作管线
+  - chinese-novelist-skill (github.com/PenglongHuang/chinese-novelist-skill)
+    参考：三层递进问答引导、悬念钩子十三式、章节校验规则
+"""
 import sys, threading
 sys.dont_write_bytecode = True  # 防止 __pycache__ 缓存旧代码
 
@@ -59,7 +65,7 @@ with st.sidebar:
                 st.rerun()
 
 # ================================================================
-# 0. 创作引导（三层递进式问答）
+# 0. 创作引导（三层递进式问答 — 参考 chinese-novelist-skill）
 # ================================================================
 if st.session_state.page == "创作引导":
     st.header("创作引导 — 三步搭建故事骨架")
@@ -468,7 +474,7 @@ elif st.session_state.page == "章节写作":
             model_choice = st.selectbox("模型", ["local", "deepseek", "claude"], index=0,
                 format_func=lambda x: {"local": "本地 Gemma 4 26B", "deepseek": "DeepSeek-v4-flash", "claude": "Claude"}[x])
 
-            # 悬念钩子设置
+            # 悬念钩子设置（十三式 — 参考 chinese-novelist-skill）
             hook_options = ["自动匹配", "危机陡现", "惊天秘密", "身份反转", "关键抉择",
                             "故人归来", "前方未知", "倒计时", "伏笔回收", "突如其来的背叛",
                             "真相碎片", "话说到一半", "时空跳跃", "能力觉醒/异变"]
@@ -687,7 +693,7 @@ elif st.session_state.page == "章节写作":
                 st.success(f"第{chapter_num}章已保存（{len(edited.replace(chr(10),''))}字）")
 
 # ================================================================
-# 6. 知识图谱
+# 6. 知识图谱（可视化角色关系 — 参考 AI-Novel-Writing-Assistant 的 Mermaid 方案）
 # ================================================================
 elif st.session_state.page == "知识图谱":
     if not st.session_state.project:
